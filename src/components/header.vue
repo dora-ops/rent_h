@@ -12,7 +12,7 @@
         </div>
         <div class="login_register" v-else>
           <a href="javascript:;" class="login" @mouseenter="isShowDropdown = true" @mouseleave="isShowDropdown = false">
-            {{userInfo.nickname}}
+            {{userInfo.username}}
             <i class="el-icon-arrow-down"></i>
             <div class="dropdown" v-show="isShowDropdown">
               <div class="content">
@@ -47,9 +47,9 @@
             <router-link to="/index">首页</router-link>
           </li>
           <li :class="on=='HousingResources'?'on':''">
-            <router-link to="/housingResources">澳洲房源</router-link>
+            <router-link to="/housingResources">房源</router-link>
           </li>
-          <li :class="on=='HouseCustom'?'on':''">
+          <!-- <li :class="on=='HouseCustom'?'on':''">
             <router-link to="/houseCustom">房源定制化服务</router-link>
           </li>
           <li :class="on=='HomeDecorationRent'?'on':''">
@@ -60,7 +60,7 @@
           </li>
           <li :class="on=='FootMark'?'on':''">
             <router-link to="/footMark">澳洲足迹</router-link>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="right">
@@ -165,7 +165,7 @@
             <div class="mail_input" v-show="accountType == 'EMAIL'">
               <input :class="errorInput.account?'mail_number error_input':'mail_number'" type="text" v-model="account" @blur="checkAccount()" @focus="errorInput.account = false" placeholder="输入您的邮箱地址"/>
             </div>
-            <div class="img_input">
+            <!-- <div class="img_input">
               <input :class="errorInput.captcha?'img_text error_input':'img_text'" type="text" @blur="checkCaptcha" @focus="errorInput.captcha = false" v-model="captcha" placeholder="输入图形验证码"/>
               <div class="active_img">
                 <img class="img" :src="activeImg">
@@ -174,7 +174,7 @@
                 <span class="refresh_text">换一批</span>
                 <i class="refresh_icon"></i>
               </div>
-            </div>
+            </div> -->
             <div class="pwd_input">
               <input :class="errorInput.pwd?'pwd_number error_input':'pwd_number'" type="password" @blur="checkPwd" @focus="errorInput.pwd = false" v-model="pwd" placeholder="请输入密码"/>
             </div>
@@ -262,6 +262,7 @@
 </template>
 
 <script>
+import {userOpt } from "../sqlMap.js";
 export default {
   name: 'Header',
   data () {
@@ -295,114 +296,7 @@ export default {
           value: '澳大利亚',
           label: '+61'
         },
-        {
-          value: '加拿大',
-          label: '+1'
-        },
-        {
-          value: '新西兰',
-          label: '+64'
-        },
-        {
-          value: '日本',
-          label: '+81'
-        },
-        {
-          value: '韩国',
-          label: '+82'
-        },
-        {
-          value: '新加坡',
-          label: '+65'
-        },
-        {
-          value: '澳门',
-          label: '+853'
-        },
-        {
-          value: '泰国',
-          label: '+66'
-        },
-        {
-          value: '马来西亚',
-          label: '+60'
-        },
-        {
-          value: '菲律宾',
-          label: '+63'
-        },
-        {
-          value: '印度',
-          label: '+91'
-        },
-        {
-          value: '土耳其',
-          label: '+90'
-        },
-        {
-          value: '俄罗斯',
-          label: '+7'
-        },
-        {
-          value: '希腊',
-          label: '+30'
-        },
-        {
-          value: '荷兰',
-          label: '+31'
-        },
-        {
-          value: '比利时',
-          label: '+32'
-        },
-        {
-          value: '法国',
-          label: '+33'
-        },
-        {
-          value: '西班牙',
-          label: '+34'
-        },
-        {
-          value: '德国',
-          label: '+349'
-        },
-        {
-          value: '葡萄牙',
-          label: '+351'
-        },
-        {
-          value: '爱尔兰',
-          label: '+353'
-        },
-        {
-          value: '意大利',
-          label: '+39'
-        },
-        {
-          value: '瑞士',
-          label: '+41'
-        },
-        {
-          value: '丹麦',
-          label: '+45'
-        },
-        {
-          value: '瑞典',
-          label: '+46'
-        },
-        {
-          value: '挪威',
-          label: '+47'
-        },
-        {
-          value: '波兰',
-          label: '+48'
-        },
-        {
-          value: '阿联酋',
-          label: '+971'
-        }
+        
       ],
       selectedValue: '+86',
       // registerData: {
@@ -452,18 +346,11 @@ export default {
     logout () {
       this.userInfo = null
       localStorage.removeItem('userInfo')
-      this.$ajax({
-        method: 'post',
-        url: 'mxj/user/logout'
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            this.$message({
+       this.$message({
               message: '恭喜您，登出成功',
               type: 'success'
             })
-          }
-        })
+    
     },
     // 注册
     register () {
@@ -612,12 +499,12 @@ export default {
       if (!(this.checkAccount() || this.checkPwd() || this.isAgree)) {
         this.$ajax({
           method: 'post',
-          url: 'mxj/user/register',
+          url: 'insert',
           params: {
             account: this.account,
             password: this.pwd,
-            verCode: this.verCode,
-            accountType: this.accountType
+            // verCode: this.verCode,
+            // accountType: this.accountType
           }
         })
           .then((res) => {
@@ -639,30 +526,23 @@ export default {
     },
     // 完成登录
     confirmLogin () {
-      if (!(this.checkAccount() || this.checkCaptcha() || this.checkPwd())) {
+      if (!(this.checkAccount() || this.checkPwd())) {
         let that = this
-        this.$ajax({
-          method: 'post',
-          url: 'mxj/user/login',
-          headers: {
-            'Content-Type': 'X-WWW-FORM-URLENCODED'
-          },
-          params: {
-            account: this.account,
-            password: this.pwd,
-            captcha: this.captcha,
-            accountType: this.accountType
-          }
+        var sql=userOpt.login.replace("?", this.account)
+          .replace("?", this.pwd);
+        this.$ajax.post("action", {
+          sql: sql
         })
           .then((res) => {
-            if (res.data.code === 0) {
+            if (res.data.length != 0) {
               // 如果记住密码
               if (that.isRemember) {
                 localStorage.setItem('accountType', this.accountType)
                 localStorage.setItem('account', this.account)
                 localStorage.setItem('pwd', this.pwd)
               }
-              that.getUserInfo()
+              localStorage.setItem('userInfo', JSON.stringify(res.data[0]))
+              that.userInfo = res.data[0]
               this.closeModel()
               this.$message({
                 message: '恭喜您，登录成功',
@@ -670,7 +550,7 @@ export default {
               })
             } else {
               this.$message({
-                message: res.data.message,
+                message: '账号密码错误',
                 type: 'warning'
               })
             }

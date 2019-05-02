@@ -13,7 +13,7 @@
     </div>
     <div class="order_box">
       <div class="city sort_item">
-        <span class="city_title title">城市:</span>
+        <span class="city_title title">地区:</span>
         <ul class="city_list list">
           <li
             @click="selectCity(index)"
@@ -24,7 +24,7 @@
           </li>
         </ul>
       </div>
-      <div class="area sort_item">
+      <!-- <div class="area sort_item">
         <span class="area_title title">地区:</span>
         <ul class="area_list list">
           <li :class="currentNum.areaCurrent == -1?'on':''" @click="selectArea('',-1)">不限</li>
@@ -41,8 +41,8 @@
             <span class="area_btn">确认搜索</span>
           </li>
         </ul>
-      </div>
-      <div class="price sort_item">
+      </div> -->
+      <!-- <div class="price sort_item">
         <span class="price_title title">每周价格:</span>
         <ul class="price_list list">
           <li @click="selectPrice(-1)" :class="currentNum.priceCurrent == -1?'on':''">不限AU$</li>
@@ -60,7 +60,7 @@
             <span class="price_search_btn" @click="getInfo">确认搜索</span>
           </li>
         </ul>
-      </div>
+      </div> -->
       <div class="rental_type sort_item">
         <span class="rental_type_title title">出租类型:</span>
         <ul class="rental_type_list list">
@@ -121,20 +121,9 @@
               </ul>
             </div>
           </li>
-          <li>
-            <span>车位数目:</span>
-            <div class="options">
-              <span>{{!currentNum.parkNum?"不限":currentNum.parkNum}}</span>
-              <span class="icon"></span>
-              <ul class="dropdown">
-                <li v-show="currentNum.parkNum" @click="selectNum('park',0)">不限</li>
-                <li v-for="i in  houseDetailInfo.parkNum" :key="i" @click="selectNum('park',i)">{{i}}</li>
-              </ul>
-            </div>
-          </li>
         </ul>
       </div>
-      <div class="supports sort_item">
+      <!-- <div class="supports sort_item">
         <span class="house_detail_title title">配套设施:</span>
         <ul class="supports_list decoration list">
           <li @click="selectFaci('decoration',-1)">
@@ -156,7 +145,7 @@
             <span class="text">{{item.chineseName}}</span>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <div class="search_content_box">
       <div class="left">
@@ -186,77 +175,6 @@
             </a>
           </div>
         </div>
-        <!-- <div class="item_list" v-show="searchList.length>0">
-          <div class="item" v-for="(item, index) in searchList" :key="index">
-            <div class="item_left">
-              <div class="img">
-                <img :src="item.cover">
-              </div>
-            </div>
-            <div class="item_center">
-              <div class="top">
-                <div class="title">{{item.name}} {{item.area}}</div>
-                <div class="house_info">
-                  <div class="details">
-                    <div class="bedroom">
-                      <i class="icon"></i>
-                      <span>{{item.bedroomNum}}</span>
-                    </div>
-                    <div class="toilet">
-                      <i class="icon"></i>
-                      <span>{{item.toiletNum}}</span>
-                    </div>
-                    <div class="park">
-                      <i class="icon"></i>
-                      <span>{{item.parkNum}}</span>
-                    </div>
-                  </div>
-                  <div class="house_type">
-                    <p>
-                      {{
-                        item.houseType=='APARTMENT'?'公寓-':
-                        item.houseType=='HOUSE'?'别墅-':
-                        item.houseType=='TOWNHOUSE'?'联排别墅-':
-                        item.houseType=='STUDIO'?'全套单间-':
-                        item.houseType=='UNIT'?'单元房-':
-                        item.houseType=='OTHERS'?'其他-':''
-                      }}{{item.houseType}}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="bottom">
-                <div class="transform" v-show="item.traffic">
-                  <i class="icon"></i>
-                  <span>交通: {{item.traffic}}</span>
-                </div>
-                <div class="school" v-show="item.school">
-                  <i class="icon"></i>
-                  <span>学校: {{item.school}}</span>
-                </div>
-                <div class="rental_type" v-show="item.rentalType">
-                  <i class="icon"></i>
-                  <span>{{item.rentalType === 'STUDIO'?'单间': item.rentalType === 'WHOLE'?'整租': item.rentalType === 'PART'?'分租': item.rentalType === 'SUBLET'?'转租': item.rentalType === 'STUDENT-APARTMENT'?'学生公寓': item.rentalType === 'HOME-STAY'?'寄宿家庭': '其他'}} - {{item.rentalTime}}起租</span>
-                </div>
-                <div class="rental_period" v-show="item.rentalPeriodUnit">
-                  <i class="icon"></i>
-                  <span>租期要求 - {{item.rentalPeriod}}{{item.rentalPeriodUnit=='YEAR'?'年':item.rentalPeriodUnit=='MONTH'?'月':item.rentalPeriodUnit=='WEEK'?'周':''}}</span>
-                </div>
-              </div>
-            </div>
-            <div class="item_right">
-              <div class="price_info">
-                <span class="price">AU$ {{item.rentalPrice}}</span>
-                <span class="price_unit">{{item.rentalPriceUnit=='YEAR'?'每年':item.rentalPriceUnit=='MONTH'?'每月':item.rentalPriceUnit=='WEEK'?'每周':''}}</span>
-              </div>
-              <div class="btn_group">
-                <router-link :to="'/detail/'+item.id" class="look_up_btn">查看房源</router-link>
-                <span v-show="!item.collected" class="collect_btn" @click="collect(item.id)">收藏房源</span>
-                <span v-show="item.collected" class="collect_btn collected" @click="cancelCollect(item.id)">已收藏</span>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <house-list :list="searchList" :collectStatus="false"></house-list>
         <div class="empty_info" v-show="searchList.length<=0">
           <p class="text">对不起，没有找到您想要的信息</p>
@@ -272,25 +190,6 @@
         </el-pagination>
       </div>
     </div>
-    <div class="slide_bar">
-      <ul class="slide_item_list">
-        <li class="top">
-          <a class="text" href="#">回到顶部</a>
-        </li>
-        <li class="phone">
-          <a class="text" href="javascript:;">在线咨询</a>
-        </li>
-        <li class="wechat">
-          <a class="text" href="javascript:;">在线咨询</a>
-        </li>
-        <li class="mail">
-          <a class="text" href="javascript:;">在线咨询</a>
-        </li>
-        <li class="chat">
-          <a class="text" href="javascript:;">在线咨询</a>
-        </li>
-      </ul>
-    </div>
     <v-footer></v-footer>
   </div>
 </template>
@@ -299,7 +198,7 @@
 import Header from './header'
 import Footer from './footer'
 import HouseList from './element/houseList'
-
+import {pub_house,cityList,houseList,rentalList} from "../sqlMap.js";
 export default {
   name: 'SearchList',
   components: {
@@ -327,7 +226,7 @@ export default {
         decoration: true,
         facilities: true
       },
-      cityList: ['墨尔本', '悉尼', '堪培拉', '黄金海岸', '布里斯班', '卧龙岗', '霍巴特', '珀斯'],
+      cityList: cityList,
       areaList: [],
       priceList: [
         {
@@ -351,77 +250,14 @@ export default {
           maxPrice: null
         }
       ],
-      rentalList: [
-        {
-          name: '不限',
-          type: null
-        },
-        {
-          name: '单间',
-          type: 'STUDIO'
-        },
-        {
-          name: '整租',
-          type: 'WHOLE'
-        },
-        {
-          name: '分租',
-          type: 'PART'
-        },
-        {
-          name: '转租',
-          type: 'SUBLET'
-        },
-        {
-          name: '学生公寓',
-          type: 'STUDENT-APARTMENT'
-        },
-        {
-          name: '寄宿家庭',
-          type: 'HOME-STAY'
-        },
-        {
-          name: '其他',
-          type: 'OTHERS'
-        }
-      ],
-      houseList: [
-        {
-          name: '不限',
-          type: null
-        },
-        {
-          name: '公寓Apartment',
-          type: 'APARTMENT'
-        },
-        {
-          name: '别墅house',
-          type: 'HOUSE'
-        },
-        {
-          name: '联排别墅Townhouse',
-          type: 'TOWNHOUSE'
-        },
-        {
-          name: '全套单间Studio',
-          type: 'STUDIO'
-        },
-        {
-          name: '单元房Unit',
-          type: 'UNIT'
-        },
-        {
-          name: '其他',
-          type: null
-        }
-      ],
+      rentalList: rentalList,
+      houseList: houseList,
       supportDecorationList: [],
       supportFacilitiesList: [],
       houseDetailInfo: {
         'bedroomNum': 5,
-        'toiletNum': 5,
+         'toiletNum': 5,
         'parlourNum': 5,
-        'parkNum': 5
       },
       currentNum: {
         'cityCurrent': 0,
@@ -444,35 +280,30 @@ export default {
   },
   methods: {
     getInfo () {
-      this.$ajax({
-        method: 'post',
-        url: 'mxj/house/list',
-        headers: {
-          'Content-Type': 'X-WWW-FORM-URLENCODED'
-        },
-        params: {
+        var params={
           cityCode: this.cityCode,
           name: this.name,
           houseType: this.houseType,
           pageSize: this.pageSize,
-          pageIndex: this.pageIndex,
+          page: this.pageIndex,
           sort: this.sort,
           bedroomNum: this.currentNum.bedroomNum,
           toiletNum: this.currentNum.toiletNum,
-          areaCodes: this.areaCode,
+         
           parlourNum: this.currentNum.parlourNum,
-          parkNum: this.currentNum.parkNum,
-          minRentalPrice: this.minPrice,
-          maxRentalPrice: this.maxPrice,
-          supportFacilities: this.selectedFacilities,
+         
           rentalType: this.rentalType
         }
-      })
+        // debugger
+        var sql=pub_house.search(params)
+        // debugger
+      this.$ajax.post('action',{sql:sql}
+      )
         .then((res) => {
-          if (res.data.code === 0) {
-            this.searchList = res.data.data.list
-            this.count = res.data.data.count
-          }
+         
+            this.searchList = res.data
+            this.count = res.data.length
+          
         })
     },
     // 获取地区列表
@@ -536,11 +367,14 @@ export default {
     // 城市
     selectCity (index) {
       this.currentNum.cityCurrent = index
-      if (index !== 0) {
-        this.$alert('您所选的城市暂未开通服务', '提示信息', {
-          confirmButtonText: '确定'
-        })
-      }
+      this.cityCode=this.cityList[index]
+      this.getInfo()
+    //   debugger
+    //   if (index !== 0) {
+    //     this.$alert('您所选的城市暂未开通服务', '提示信息', {
+    //       confirmButtonText: '确定'
+    //     })
+    //   }
     },
     // 地区
     selectArea (code, index) {

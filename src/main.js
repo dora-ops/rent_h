@@ -8,12 +8,16 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
-Vue.prototype.$ajax = axios
+const instance = axios.create({
+    baseURL: 'http://localhost:3000/api/base/', // api 的 base_url
+    
+})
+Vue.prototype.$ajax = instance
 
 Vue.config.productionTip = false
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 // 设置根链接
-axios.defaults.baseURL = 'http://111.231.85.203:8080/'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

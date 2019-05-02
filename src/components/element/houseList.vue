@@ -22,7 +22,7 @@
                 </div>
                 <div class="park">
                   <i class="icon"></i>
-                  <span>{{item.parkNum}}</span>
+                  <span>{{item.parlourNum}}</span>
                 </div>
               </div>
               <div class="house_type">
@@ -40,14 +40,8 @@
             </div>
           </div>
           <div class="bottom">
-            <div class="transform" v-show="item.traffic">
-              <i class="icon"></i>
-              <span>交通: {{item.traffic}}</span>
-            </div>
-            <div class="school" v-show="item.school">
-              <i class="icon"></i>
-              <span>学校: {{item.school}}</span>
-            </div>
+            
+           
             <div class="rental_type" v-show="item.rentalType">
               <i class="icon"></i>
               <span>{{item.rentalType === 'STUDIO'?'单间': item.rentalType === 'WHOLE'?'整租': item.rentalType === 'PART'?'分租': item.rentalType === 'SUBLET'?'转租': item.rentalType === 'STUDENT-APARTMENT'?'学生公寓': item.rentalType === 'HOME-STAY'?'寄宿家庭': '其他'}} - {{item.rentalTime}}起租</span>
