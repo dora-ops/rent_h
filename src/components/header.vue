@@ -609,7 +609,7 @@ export default {
     },
     // 完成注册
     confirmRegister () {
-      if (!(this.checkAccount() || this.checkCaptcha() || this.checkVerCode() || this.checkPwd() || this.isAgree)) {
+      if (!(this.checkAccount() || this.checkPwd() || this.isAgree)) {
         this.$ajax({
           method: 'post',
           url: 'mxj/user/register',
