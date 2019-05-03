@@ -47,11 +47,11 @@
           </div>
         </div>
       </div>
-      <div class="right">
+      <!-- <div class="right">
         <span class="weixin">微信服务号</span>
         <span class="guanzhu">关注我们</span>
         <img class="erweima" src="../assets/img/erweima.png">
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

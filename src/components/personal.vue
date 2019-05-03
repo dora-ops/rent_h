@@ -12,7 +12,7 @@
       <div class="body_box">
         <div class="left_box">
           <ul class="tab_list">
-            <li>
+            <!-- <li>
               <router-link to="/personal/orderInfo" :class="page === 'OrderInfo'?'on':''">
                 <img v-show="page === 'OrderInfo'" class="icon" src="../assets/img/house_manager.png">
                 <img v-show="page !== 'OrderInfo'" class="icon" src="../assets/img/house_manager_unsel.png">
@@ -32,7 +32,7 @@
                 <img v-show="page !== 'CollectInfo'" class="icon" src="../assets/img/my_collect_unsel.png">
                 我的收藏
               </router-link>
-            </li>
+            </li> -->
             <li>
               <router-link to="/personal/houseInfo" :class="page === 'HouseInfo'?'on':''">
                 <img v-show="page === 'HouseInfo'" class="icon" src="../assets/img/house_manager.png">
@@ -43,7 +43,7 @@
             <li>
               <router-link to="/personal/personalInfo" :class="page === 'PersonalInfo'?'on':''">
                 <img class="icon" src="../assets/img/personal_unsel.png">
-                个人中心
+                发布房源
               </router-link>
             </li>
           </ul>

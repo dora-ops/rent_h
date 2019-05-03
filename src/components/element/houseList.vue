@@ -57,14 +57,14 @@
             <span class="price">AU$ {{item.rentalPrice}}</span>
             <span class="price_unit">{{item.rentalPriceUnit=='YEAR'?'每年':item.rentalPriceUnit=='MONTH'?'每月':item.rentalPriceUnit=='WEEK'?'每周':''}}</span>
           </div>
-          <div class="btn_group" v-show="!collectStatus">
+          <!-- <div class="btn_group" v-show="!collectStatus">
             <router-link :to="'/detail/'+item.id" class="look_up_btn">查看房源</router-link>
             <span v-show="!item.collected" class="collect_btn" @click="collect(item.id)">收藏房源</span>
             <span v-show="item.collected" class="collect_btn collected" @click="cancelCollect(item.id)">取消收藏</span>
-          </div>
+          </div> -->
           <div class="btn_group" v-show="collectStatus">
-            <router-link :to="'/detail/'+item.id" class="look_up_btn">查看房源</router-link>
-            <span class="collect_btn collected" @click="cancelCollect(item.id)">取消收藏</span>
+            <router-link :to="'/personal/personalInfo?id='+item.id" class="look_up_btn">修改</router-link>
+            <span class="collect_btn collected" @click="cancelCollect(item.id)">删除</span>
           </div>
         </div>
       </div>
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import {pub_house,cityList,houseList,rentalList} from "../../sqlMap.js"
 export default {
   name: 'HouseList',
   props: ['list', 'collectStatus'],
@@ -101,18 +102,13 @@ export default {
     // 取消收藏
     cancelCollect (index) {
       let that = this
-      this.$ajax({
-        method: 'post',
-        url: 'mxj/house/cancelCollect',
-        params: {
-          houseId: index
-        }
-      })
-        .then((res) => {
-          if (res.data.code === 0) {
-            that.$parent.getInfo()
-          }
+      this.$ajax.post("action", {
+          sql: pub_house.deleteOne.replace('?',index)
         })
+          .then((res) => {
+            //   this.searchList=res.data
+            location.reload()
+          })
     }
   }
 }

@@ -17,9 +17,10 @@
             <div class="dropdown" v-show="isShowDropdown">
               <div class="content">
                 <div class="left">
-                  <router-link tag="div" to="/personal/orderInfo" class="account">我的账户</router-link>
+                    <router-link tag="div" to="/personal/houseInfo" class="account">我的房源</router-link>
+                  <!-- <router-link tag="div" to="/personal/orderInfo" class="account">我的账户</router-link>
                   <router-link tag="div" to="/personal/messageInfo" class="message">消息中心</router-link>
-                  <router-link tag="div" to="/personal/collectInfo" class="collect">我的收藏</router-link>
+                  <router-link tag="div" to="/personal/collectInfo" class="collect">我的收藏</router-link> -->
                 </div>
                 <router-link to="/personal/personalInfo" tag="div" class="right">
                   <img class="avatar" src="../assets/img/avatar.png">
@@ -29,7 +30,7 @@
             </div>
           </a>
           <span class="v_divide">|</span>
-          <router-link to="/personal/orderInfo" class="order">我的订单</router-link>
+          <!-- <router-link to="/personal/orderInfo" class="order">我的订单</router-link> -->
         </div>
         <div class="publish_box">
           <button class="publish">发布房源</button>
@@ -93,7 +94,7 @@
               </el-select>
               <input :class="errorInput.account?'phone_number error_input':'phone_number'" type="text" @blur="checkAccount()" @focus="errorInput.account = false" v-model="account" placeholder="输入您的手机号码"/>
             </div>
-            <div class="mail_input" v-show="accountType == 'EMAIL'">
+            <!-- <div class="mail_input" v-show="accountType == 'EMAIL'">
               <input :class="errorInput.account?'mail_number error_input':'mail_number'" type="text" @blur="checkAccount()" @focus="errorInput.account = false" v-model="account" placeholder="输入您的邮箱地址"/>
             </div>
             <div class="img_input">
@@ -105,11 +106,11 @@
                 <span class="refresh_text">换一批</span>
                 <i class="refresh_icon"></i>
               </div>
-            </div>
-            <div class="active_input" v-show="accountType == 'PHONE'">
+            </div> -->
+            <!-- <div class="active_input" v-show="accountType == 'PHONE'">
               <input :class="errorInput.verCode?'active_number error_input':'active_number'" type="text" @blur="checkVerCode" @focus="errorInput.verCode = false" v-model="verCode" placeholder="输入短信验证码"/>
               <span class="get_active" @click="getSmsCode">获取验证码</span>
-            </div>
+            </div> -->
             <div class="active_input" v-show="accountType == 'EMAIL'">
               <input :class="errorInput.verCode?'active_number error_input':'active_number'" type="text" @blur="checkVerCode" @focus="errorInput.verCode = false" v-model="verCode" placeholder="输入邮箱验证码"/>
               <span class="get_active" @click="getSmsCode">获取验证码</span>
@@ -496,20 +497,20 @@ export default {
     },
     // 完成注册
     confirmRegister () {
-      if (!(this.checkAccount() || this.checkPwd() || this.isAgree)) {
-        this.$ajax({
-          method: 'post',
-          url: 'insert',
-          params: {
-            account: this.account,
+        // debugger
+      if (!(this.checkAccount() || this.checkPwd() )&& this.isAgree) {
+          this.$ajax
+        .post("insert", {
+          table: "user",
+         data: {
+            username: this.account,
             password: this.pwd,
-            // verCode: this.verCode,
-            // accountType: this.accountType
+            enabled:1,
+            avatar:'https://i.loli.net/2018/12/06/5c08894d8de21.jpg'
           }
-        })
-          .then((res) => {
+        }).then((res) => {
             console.log(res.data)
-            if (res.data.code === 0) {
+            if (res.data.affectedRows ==1) {
               this.closeModel()
               this.$message({
                 message: '恭喜您，注册成功',
@@ -517,7 +518,7 @@ export default {
               })
             } else {
               this.$message({
-                message: res.data.message,
+                message:'注册失败',
                 type: 'warning'
               })
             }

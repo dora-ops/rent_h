@@ -194,6 +194,9 @@ const commentlist = {
 
 const pub_house = {
     getAll: 'select * from pub_house',
+    find:'select * from pub_house where cus_id=?',
+    deleteOne:'delete from pub_house where id=?',
+    getOne:'select * from pub_house where id=?',
     search: function (listQuery) {
 
         var sql = 'SELECT * FROM pub_house where 1=1 '
@@ -240,6 +243,19 @@ const pub_house = {
        
         
         return sql
+    },
+    update:function (params) {
+        var d=params
+        var sql='UPDATE `pub_house` SET '
+        for (const key in d) {
+            if (key!='id'&&key!='create_time') {
+                sql=sql+' '+key+'="'+d[key] +'",'
+            }
+        }
+        sql = sql.substring(0, sql.lastIndexOf(','))
+        sql=sql+' WHERE id=?'
+        sql=sql.replace('?',d.id)
+        return sql;
     }
 }
 
