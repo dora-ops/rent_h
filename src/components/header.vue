@@ -506,7 +506,8 @@ export default {
             username: this.account,
             password: this.pwd,
             enabled:1,
-            avatar:'https://i.loli.net/2018/12/06/5c08894d8de21.jpg'
+            avatar:'https://i.loli.net/2018/12/06/5c08894d8de21.jpg',
+            email:this.account+'@qq.com'
           }
         }).then((res) => {
             console.log(res.data)
