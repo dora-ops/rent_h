@@ -43,7 +43,7 @@
           </div>
           <div class="mail">
             <i class="icon"></i>
-            <span>info@melrealty.com</span>
+            <span>info@XXX.com</span>
           </div>
         </div>
       </div>

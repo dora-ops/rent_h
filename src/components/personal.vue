@@ -5,7 +5,7 @@
       <div class="bread_box">
         <ul class="bread">
           <li><router-link to="/index">首页</router-link></li>
-          <li><router-link to="/personal/orderInfo">我的账户</router-link></li>
+          <!-- <li><router-link to="/personal/orderInfo">我的账户</router-link></li> -->
           <li><router-link :to="path">{{page === 'OrderInfo' ? '我的订单' : page === 'MessageInfo' ? '消息中心' : page === 'CollectInfo' ? '我的收藏' : page === 'HouseInfo' ? '我的房源' : page === 'PersonalInfo' ? '个人中心' : ''}}</router-link></li>
         </ul>
       </div>

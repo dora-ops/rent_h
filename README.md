@@ -1,5 +1,4 @@
 
-> ls
 
 ## Build Setup
 
@@ -25,3 +24,7 @@ npm run e2e
 # run all tests
 npm test
 ```
+## header结构化编程
+扁平化图片列表展示查询
+图片化和各个方式组合详情
+产生订单方式的

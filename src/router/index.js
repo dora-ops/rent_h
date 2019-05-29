@@ -10,8 +10,7 @@ import HouseCustom from '@/components/houseCustom'
 import HomeDecorationRent from '@/components/homeDecorationRent'
 // 生活服务
 import LifeService from '@/components/lifeService'
-// 澳洲足迹
-import FootMark from '@/components/footMark'
+
 // 房源详情页
 import Detail from '@/components/detail'
 // 定制管理
@@ -73,12 +72,7 @@ export default new Router({
       name: 'LifeService',
       component: LifeService
     },
-    // 澳洲足迹
-    {
-      path: '/footMark',
-      name: 'FootMark',
-      component: FootMark
-    },
+   
     // 房源详情页
     {
       path: '/detail/:id',

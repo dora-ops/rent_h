@@ -1,5 +1,6 @@
 <template>
   <div class="header_box">
+      <!-- 个人中心 -->
     <div class="nav">
       <div class="left">
         <span class="watermark">为每一个飘扬过海的梦想，找一个家</span>
@@ -18,9 +19,9 @@
               <div class="content">
                 <div class="left">
                     <router-link tag="div" to="/personal/houseInfo" class="account">我的房源</router-link>
-                  <!-- <router-link tag="div" to="/personal/orderInfo" class="account">我的账户</router-link>
+                  <router-link tag="div" to="/personal/orderInfo" class="account">我的账户</router-link>
                   <router-link tag="div" to="/personal/messageInfo" class="message">消息中心</router-link>
-                  <router-link tag="div" to="/personal/collectInfo" class="collect">我的收藏</router-link> -->
+                  <router-link tag="div" to="/personal/collectInfo" class="collect">我的收藏</router-link>
                 </div>
                 <router-link to="/personal/personalInfo" tag="div" class="right">
                   <img class="avatar" src="../assets/img/avatar.png">
@@ -30,14 +31,15 @@
             </div>
           </a>
           <span class="v_divide">|</span>
-          <!-- <router-link to="/personal/orderInfo" class="order">我的订单</router-link> -->
+          <router-link to="/personal/orderInfo" class="order">我的订单</router-link>
         </div>
         <div class="publish_box">
-          <button class="publish">发布房源</button>
+            <router-link to="/personal/personalInfo"><button class="publish">发布房源</button></router-link>
         </div>
       </div>
     </div>
     <div class="divide"></div>
+    <!-- 主板块 -->
     <div class="search_nav">
       <div class="left">
         <img class="logo" src="../assets/img/logo.png">
@@ -50,7 +52,7 @@
           <li :class="on=='HousingResources'?'on':''">
             <router-link to="/housingResources">房源</router-link>
           </li>
-          <!-- <li :class="on=='HouseCustom'?'on':''">
+          <li :class="on=='HouseCustom'?'on':''">
             <router-link to="/houseCustom">房源定制化服务</router-link>
           </li>
           <li :class="on=='HomeDecorationRent'?'on':''">
@@ -59,9 +61,6 @@
           <li :class="on=='LifeService'?'on':''">
             <router-link to="/lifeService">生活服务</router-link>
           </li>
-          <li :class="on=='FootMark'?'on':''">
-            <router-link to="/footMark">澳洲足迹</router-link>
-          </li> -->
         </ul>
       </div>
       <div class="right">
@@ -73,6 +72,7 @@
       </div>
     </div>
     <div class="divide"></div>
+    <!-- 注册和登陆 -->
     <div class="form_model_box" v-show="formAbout">
       <div class="content_box">
         <!-- 注册 -->
@@ -80,7 +80,7 @@
           <div class="title">注册新账户</div>
           <div class="register_type type">
             <a :class="accountType=='PHONE'?'phone on':'phone'" href="javascript:;" @click="changeType('PHONE')">手机注册</a>
-            <a :class="accountType=='EMAIL'?'mail on':'mail'" href="javascript:;" @click="changeType('EMAIL')">邮箱注册</a>
+            <!-- <a :class="accountType=='EMAIL'?'mail on':'mail'" href="javascript:;" @click="changeType('EMAIL')">邮箱注册</a> -->
           </div>
           <div class="form_about">
             <div class="phone_input" v-show="accountType == 'PHONE'">
@@ -149,7 +149,7 @@
           <div class="title">账户登录</div>
           <div class="login_type type">
             <a :class="accountType=='PHONE'?'phone on':'phone'" href="javascript:;" @click="changeType('PHONE')">手机登录</a>
-            <a :class="accountType=='EMAIL'?'mail on':'mail'" href="javascript:;" @click="changeType('EMAIL')">邮箱登录</a>
+            <!-- <a :class="accountType=='EMAIL'?'mail on':'mail'" href="javascript:;" @click="changeType('EMAIL')">邮箱登录</a> -->
           </div>
           <div class="form_about">
             <div class="phone_input" v-show="accountType == 'PHONE'">
@@ -184,9 +184,9 @@
                 <i :class="isRemember?'selected icon':'icon'" @click="isRemember = !isRemember"></i>
                 <span class="agree_text">记住账户</span>
               </div>
-              <div class="right">
+              <!-- <div class="right">
                 <a href="javascript:;" @click="forgetPwd">忘记密码？</a>
-              </div>
+              </div> -->
             </div>
             <div class="login_btn confirm">
               <span :class="account && captcha && pwd?'btn_available btn':'btn'" @click="confirmLogin">登录</span>

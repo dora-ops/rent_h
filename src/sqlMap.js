@@ -248,7 +248,7 @@ const pub_house = {
         var d=params
         var sql='UPDATE `pub_house` SET '
         for (const key in d) {
-            if (key!='id'&&key!='create_time') {
+            if (key!='id'&&key!='create_time'&&d[key]) {
                 sql=sql+' '+key+'="'+d[key] +'",'
             }
         }

@@ -36,7 +36,7 @@
                     <el-input v-model="info.rentalPrice"></el-input>
                 </el-form-item>
                 <el-form-item label="房子照片">
-                    <el-upload class="upload-demo" action="http://localhost:3000/api/base/upload" :on-success="handleAvatarSuccess" :file-list="fileList" list-type="picture">
+                    <el-upload class="upload-demo" action="http://localhost:3000/api/base/upload" :on-remove="handleRemove" :on-success="handleAvatarSuccess" :file-list="fileList" :multiple=false :limit=1 list-type="picture">
                         <el-button size="small" type="primary">点击上传</el-button>
 
                     </el-upload>
@@ -57,7 +57,7 @@
           <el-input type="textarea" v-model="info.selfIntroduce"></el-input>
         </el-form-item> -->
                 <div class="save_btn">
-                    <span class="save" @click="savePersonalInfo">保存</span>
+                    <span class="save" @click="savePersonalInfo">{{is_save?'保存':'修改'}}</span>
                 </div>
             </el-form>
 
@@ -84,10 +84,14 @@ export default {
       houseList: houseList,
       rentalList: rentalList,
       rentalPeriodUnitList: rentalPeriodUnitList,
-      
+      is_save: true
     };
   },
   created() {
+    let id = this.$route.query.id;
+    if (id) {
+      this.is_save = false;
+    }
     this.getUserInfo();
   },
   methods: {
@@ -100,7 +104,7 @@ export default {
         var sql = pub_house.getOne.replace("?", id);
         this.$ajax.post("action", { sql: sql }).then(res => {
           this.info = res.data[0];
-        //   console.log(this.cover)
+          //   console.log(this.cover)
           this.fileList.push({
             // name: "文件名称",
             url: this.info.cover
@@ -109,19 +113,23 @@ export default {
       }
     },
     savePersonalInfo() {
-        let id = this.$route.query.id;
-        if (id) {
-            this.$ajax.post("action", { sql: pub_house.update(this.info) }).then(res => {})
-            
-        }else{
-              this.$ajax
-        .post("insert", {
-          table: "pub_house",
-          data: this.info
-        })
-        .then(res => {});
-        }
-    
+      let id = this.$route.query.id;
+      if (id) {
+        this.$ajax
+          .post("action", { sql: pub_house.update(this.info) })
+          .then(res => {
+            this.$router.push("/personal/houseInfo");
+          });
+      } else {
+        this.$ajax
+          .post("insert", {
+            table: "pub_house",
+            data: this.info
+          })
+          .then(res => {
+            this.$router.push("/housingResources");
+          });
+      }
     },
     handleAvatarSuccess(res, file) {
       var sql = resource.getOne.replace("?", res[0]);
@@ -139,6 +147,15 @@ export default {
             url: "http://localhost:3000/" + data.fileName
           });
         });
+    },
+    handleRemove(file, fileList) {
+        
+      var index = this.fileList.indexOf(file);
+      if (index > -1) {
+        this.fileList.splice(index, 1);
+      }
+      // this.fileList.reduce(file.url)
+      console.log(this.fileList);
     }
   }
 };
